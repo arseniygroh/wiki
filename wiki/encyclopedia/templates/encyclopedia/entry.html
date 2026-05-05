@@ -1,0 +1,19 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+
+{% block body %}
+    {{ content|safe }}
+    <div class="entry_actions">
+        <a href="{% url 'edit' title=title %}">Edit the content</a>
+        <form action="{% url 'delete' title=title %}" method="post" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to delete this page?');">
+            {% csrf_token %}
+            <button class="delete_btn" type="submit">
+                Delete entry
+            </button>
+        </form>
+    </div>
+{% endblock %}
